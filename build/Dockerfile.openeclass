@@ -1,0 +1,8 @@
+FROM nginx:alpine
+
+ARG mversion=3.7
+ARG version=3.7.1
+
+RUN wget https://download.openeclass.org/files/${mversion}/openeclass-${version}.tar.gz
+RUN tar xvf /openeclass-${version}.tar.gz && mv /openeclass-${version} /openeclass
+COPY ./openeclass.conf /etc/nginx/conf.d/default.conf

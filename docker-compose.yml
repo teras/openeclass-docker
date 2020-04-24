@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+    openeclass:
+        build:
+            context: build
+            dockerfile: Dockerfile.openeclass
+        image: openeclass/web
+        volumes:
+            - app:/openeclass
+            - ./config:/openeclass/config
+            - ./courses:/openeclass/courses
+            - ./video:/openeclass/video
+        ports:
+            - "8080:80"
+    php:
+        build:
+            context: build
+            dockerfile: Dockerfile.php
+        image: openeclass/php
+        volumes:
+            - app:/openeclass
+            - ./config:/openeclass/config
+            - ./courses:/openeclass/courses
+            - ./video:/openeclass/video
+    eclassdb:   # The location of the database
+        image: mysql:5.7
+        environment:
+            MYSQL_ROOT_PASSWORD: dbpassword     # The password of the database
+        volumes:
+            - ./mysql:/var/lib/mysql
+
+
+volumes:
+    app:
