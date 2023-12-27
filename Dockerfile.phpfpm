@@ -1,7 +1,4 @@
-FROM php:fpm
-
-ARG mversion=3.7
-ARG version=3.7.1
+FROM docker.io/php:fpm
 
 RUN buildDeps=" \
         default-libmysqlclient-dev \
@@ -25,4 +22,4 @@ RUN buildDeps=" \
     && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y $buildDeps $runtimeDeps 
 
 # RUN docker-php-ext-install iconv intl mbstring mysqli opcache pdo_mysql pdo_pgsql  zip gd ldap
-RUN docker-php-ext-install iconv intl mysqli opcache pdo_mysql pdo_pgsql  zip gd ldap
+RUN docker-php-ext-install iconv intl mysqli opcache pdo_mysql pdo_pgsql zip gd ldap soap
